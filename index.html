@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>동구의 희망, 박미경 - 30년 현장 전문가</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
@@ -10,24 +10,38 @@
         body {
             font-family: 'Noto Sans KR', sans-serif;
             scroll-behavior: smooth;
+            /* 모바일 스크롤 최적화: 터치 간섭 제거 */
+            -webkit-overflow-scrolling: touch;
+            overflow-x: hidden;
+            background-color: #f9fafb;
         }
         .hero-gradient {
             background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
         }
-        .pledge-card:hover {
-            transform: translateY(-5px);
-            transition: all 0.3s ease;
+        .pledge-card {
+            transition: transform 0.3s ease;
         }
-        /* 드라이브 미리보기를 위한 컨테이너 스타일 */
+        /* 드라이브 미리보기 컨테이너: 스크롤 방해 방지 */
         .drive-embed-container {
             position: relative;
             width: 100%;
             height: 100%;
             background-color: #f3f4f6;
-            border-radius: 1rem;
+            border-radius: 1.5rem;
             overflow: hidden;
+            /* 모바일에서 iframe 내부 클릭이 스크롤을 막지 않도록 설정 */
+            pointer-events: none; 
         }
-        .drive-embed-container iframe {
+        /* 비디오는 재생 컨트롤이 필요하므로 클릭 허용하되 영역 최적화 */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 2rem;
+            background: #000;
+        }
+        .video-wrapper iframe {
             position: absolute;
             top: 0;
             left: 0;
@@ -35,118 +49,114 @@
             height: 100%;
             border: none;
         }
+        /* 스크롤 가이드: 모바일에서 사진 영역을 터치해도 스크롤이 되도록 함 */
+        .touch-friendly {
+            pointer-events: none;
+        }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="text-gray-900">
 
     <!-- 네비게이션 -->
     <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
         <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-black text-blue-700">박미경</div>
-            <div class="space-x-6 text-sm font-bold text-gray-600">
-                <a href="#about" class="hover:text-blue-600 transition-colors">소개</a>
-                <a href="#video" class="hover:text-blue-600 transition-colors">영상</a>
-                <a href="#pledge" class="hover:text-blue-600 transition-colors">공약</a>
+            <div class="text-2xl font-black text-blue-700 tracking-tighter">박미경</div>
+            <div class="space-x-5 text-sm font-bold text-gray-600">
+                <a href="#about" class="hover:text-blue-600">소개</a>
+                <a href="#video" class="hover:text-blue-600">영상</a>
+                <a href="#pledge" class="hover:text-blue-600">공약</a>
             </div>
         </div>
     </nav>
 
     <!-- 히어로 섹션 -->
-    <header class="hero-gradient text-white pt-24 pb-36 px-6">
+    <header class="hero-gradient text-white pt-20 pb-32 px-6">
         <div class="max-w-4xl mx-auto text-center">
-            <span class="inline-block px-4 py-1 bg-blue-900/40 rounded-full text-sm font-semibold mb-6 border border-white/20">30년 의료·돌봄 현장 전문가</span>
-            <h1 class="text-4xl md:text-6xl font-black mb-8 leading-tight">
+            <span class="inline-block px-4 py-1 bg-blue-900/40 rounded-full text-xs font-semibold mb-6 border border-white/20">30년 의료·돌봄 현장 전문가</span>
+            <h1 class="text-4xl md:text-6xl font-black mb-8 leading-tight tracking-tight">
                 동구의 삶을 바꿀<br>단 하나의 선택, 박미경
             </h1>
-            <p class="text-xl opacity-90 font-light leading-relaxed">
+            <p class="text-lg md:text-xl opacity-90 font-light leading-relaxed">
                 "말이 아닌 실행으로, 결과로 보답하겠습니다."
             </p>
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-6 -mt-24">
-        <!-- 사진 섹션 -->
-        <section id="about" class="grid md:grid-cols-2 gap-8 mb-20">
-            <!-- 사진 1 -->
-            <div class="bg-white p-5 rounded-[2rem] shadow-2xl">
+    <main class="max-w-5xl mx-auto px-4 md:px-6 -mt-24">
+        <!-- 사진 섹션 (터치 간섭 최소화) -->
+        <section id="about" class="grid md:grid-cols-2 gap-6 md:gap-8 mb-20">
+            <div class="bg-white p-4 rounded-[2rem] shadow-xl">
                 <div class="aspect-[3/4] drive-embed-container shadow-inner">
                     <iframe src="https://drive.google.com/file/d/1KQOaljZaZgYPGlSJEIEhp2r-0bHkDl7w/preview"></iframe>
                 </div>
-                <div class="mt-6 text-center">
-                    <p class="text-blue-700 font-bold mb-1">현장 전문가</p>
-                    <p class="text-gray-500 text-sm">시민의 삶을 직접 겪어온 30년</p>
-                </div>
+                <p class="mt-4 text-center font-bold text-blue-800 text-sm">현장에서 시민과 함께하는 박미경</p>
             </div>
-            <!-- 사진 2 -->
-            <div class="bg-white p-5 rounded-[2rem] shadow-2xl">
+            <div class="bg-white p-4 rounded-[2rem] shadow-xl">
                 <div class="aspect-[3/4] drive-embed-container shadow-inner">
                     <iframe src="https://drive.google.com/file/d/1FxhuUB1KjratMORa2tFvf6vLHKolwQCM/preview"></iframe>
                 </div>
-                <div class="mt-6 text-center">
-                    <p class="text-blue-700 font-bold mb-1">준비된 후보</p>
-                    <p class="text-gray-500 text-sm">동구의 내일을 책임질 리더십</p>
-                </div>
+                <p class="mt-4 text-center font-bold text-blue-800 text-sm">30년 전문성을 갖춘 따뜻한 리더</p>
             </div>
         </section>
 
         <!-- 후보 인사말 -->
-        <section class="mb-24 text-center px-4">
+        <section class="mb-24 text-center px-2">
             <div class="inline-block w-16 h-1.5 bg-blue-600 rounded-full mb-10"></div>
-            <h2 class="text-3xl md:text-4xl font-black mb-10 text-gray-800">"동구의 돌봄을 하나로 연결하겠습니다"</h2>
-            <div class="max-w-3xl mx-auto text-lg md:text-xl text-gray-700 leading-relaxed space-y-6 font-medium bg-white p-10 rounded-[2.5rem] shadow-lg border border-gray-100">
+            <h2 class="text-3xl md:text-4xl font-black mb-10 text-gray-800 tracking-tight">"동구의 돌봄을 하나로 연결하겠습니다"</h2>
+            <div class="max-w-3xl mx-auto text-lg text-gray-700 leading-relaxed space-y-6 font-medium bg-white p-8 md:p-12 rounded-[2.5rem] shadow-lg border border-gray-100">
                 <p>30년 의료·돌봄 현장에서 시민의 삶을 직접 겪어온 박미경입니다.</p>
                 <p>동구의 돌봄은 아직도 따로 움직이고 있습니다.</p>
-                <p class="text-blue-700 font-extrabold text-2xl md:text-3xl bg-blue-50 py-4 rounded-2xl">
+                <p class="text-blue-700 font-extrabold text-2xl md:text-3xl bg-blue-50 py-6 px-4 rounded-2xl leading-snug">
                     의료·복지·돌봄을 연결하는 통합돌봄으로<br class="hidden md:block"> 사각지대를 없애겠습니다.
                 </p>
             </div>
         </section>
 
         <!-- 동영상 섹션 -->
-        <section id="video" class="mb-24">
+        <section id="video" class="mb-24 px-2">
             <div class="text-center mb-10">
                 <h3 class="text-2xl font-bold text-gray-800">박미경의 진심, 영상으로 확인하세요</h3>
             </div>
-            <div class="bg-black rounded-[2.5rem] overflow-hidden shadow-2xl aspect-video relative border-8 border-white">
+            <div class="video-wrapper shadow-2xl border-[6px] md:border-[12px] border-white">
                 <iframe 
                     src="https://drive.google.com/file/d/1jOby79Tbagj8kLuCYO5M-ImqYN0bcxUy/preview" 
-                    class="absolute inset-0 w-full h-full" 
-                    allow="autoplay"
                     allowfullscreen>
                 </iframe>
             </div>
         </section>
 
         <!-- 공약 섹션 -->
-        <section id="pledge" class="mb-24 px-4">
+        <section id="pledge" class="mb-32 px-2">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-black text-gray-800">박미경의 3대 핵심 약속</h2>
             </div>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="pledge-card bg-white p-10 rounded-[2rem] border border-gray-100 shadow-xl text-center">
-                    <div class="w-20 h-20 bg-blue-100 rounded-3xl flex items-center justify-center text-blue-600 mx-auto mb-8 text-3xl">🤝</div>
-                    <h4 class="text-xl font-black mb-4 text-blue-800 leading-tight">통합돌봄 완성</h4>
-                    <p class="text-gray-600 leading-relaxed">의료·복지·돌봄을 연결하여 단 한 명의 소외되는 이웃도 없는 동구를 만들겠습니다.</p>
+            <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+                <div class="pledge-card bg-white p-8 md:p-10 rounded-[2rem] border border-gray-100 shadow-xl text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 mx-auto mb-8 text-3xl">🤝</div>
+                    <h4 class="text-xl font-black mb-4 text-blue-800 tracking-tight">통합돌봄 완성</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">의료·복지·돌봄을 연결하여 단 한 명의 소외되는 이웃도 없는 동구를 만들겠습니다.</p>
                 </div>
-                <div class="pledge-card bg-white p-10 rounded-[2rem] border border-gray-100 shadow-xl text-center">
-                    <div class="w-20 h-20 bg-green-100 rounded-3xl flex items-center justify-center text-green-600 mx-auto mb-8 text-3xl">👵</div>
-                    <h4 class="text-xl font-black mb-4 text-green-800 leading-tight">촘촘한 복지</h4>
-                    <p class="text-gray-600 leading-relaxed">어르신과 취약계층의 삶을 현장에서 직접 챙기며 놓치지 않고 지원하겠습니다.</p>
+                <div class="pledge-card bg-white p-8 md:p-10 rounded-[2rem] border border-gray-100 shadow-xl text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center text-green-600 mx-auto mb-8 text-3xl">👵</div>
+                    <h4 class="text-xl font-black mb-4 text-green-800 tracking-tight">촘촘한 복지</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">어르신과 취약계층의 삶을 현장에서 직접 챙기며 놓치지 않고 지원하겠습니다.</p>
                 </div>
-                <div class="pledge-card bg-white p-10 rounded-[2rem] border border-gray-100 shadow-xl text-center">
-                    <div class="w-20 h-20 bg-orange-100 rounded-3xl flex items-center justify-center text-orange-600 mx-auto mb-8 text-3xl">🏠</div>
-                    <h4 class="text-xl font-black mb-4 text-orange-800 leading-tight">안전한 주거</h4>
-                    <p class="text-gray-600 leading-relaxed">누구나 안전하고 쾌적하게 살 수 있는 동구, 누구나 부러워하는 동구를 만들겠습니다.</p>
+                <div class="pledge-card bg-white p-8 md:p-10 rounded-[2rem] border border-gray-100 shadow-xl text-center">
+                    <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center text-orange-600 mx-auto mb-8 text-3xl">🏠</div>
+                    <h4 class="text-xl font-black mb-4 text-orange-800 tracking-tight">안전한 주거</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">누구나 안전하고 쾌적하게 살 수 있는 동구, 가장 살기 좋은 안전한 동구를 약속합니다.</p>
                 </div>
             </div>
         </section>
-
-        <!-- 마지막 인사 -->
-        <section class="bg-blue-700 rounded-[3rem] p-16 text-center text-white mb-20 shadow-2xl shadow-blue-200">
-            <p class="text-xl md:text-2xl opacity-90 mb-6 font-light">"현장의 경험으로 결과로 보답하겠습니다"</p>
-            <h2 class="text-3xl md:text-5xl font-black mb-10 leading-tight">이번 선택, 박미경에게 맡겨주십시오</h2>
-        </section>
     </main>
+
+    <footer class="bg-gray-900 text-gray-500 py-16 px-6 text-center">
+        <div class="max-w-5xl mx-auto border-t border-gray-800 pt-10">
+            <p class="text-xl font-black text-gray-100 mb-6">"말이 아닌 실행으로, 결과로 보답하겠습니다"</p>
+            <p class="mb-4 text-xs md:text-sm">© 2026 박미경 후보. 모든 권리는 후보자에게 있습니다.</p>
+            <p class="text-[10px] opacity-40">본 웹사이트는 제공된 공약을 바탕으로 제작된 공식 홍보 페이지입니다.</p>
+        </div>
+    </footer>
 
 </body>
 </html>
