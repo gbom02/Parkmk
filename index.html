@@ -49,10 +49,6 @@
             height: 100%;
             border: none;
         }
-        /* 스크롤 가이드: 모바일에서 사진 영역을 터치해도 스크롤이 되도록 함 */
-        .touch-friendly {
-            pointer-events: none;
-        }
     </style>
 </head>
 <body class="text-gray-900">
@@ -62,8 +58,8 @@
         <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
             <div class="text-2xl font-black text-blue-700 tracking-tighter">박미경</div>
             <div class="space-x-5 text-sm font-bold text-gray-600">
-                <a href="#about" class="hover:text-blue-600">소개</a>
                 <a href="#video" class="hover:text-blue-600">영상</a>
+                <a href="#about" class="hover:text-blue-600">소개</a>
                 <a href="#pledge" class="hover:text-blue-600">공약</a>
             </div>
         </div>
@@ -83,7 +79,34 @@
     </header>
 
     <main class="max-w-5xl mx-auto px-4 md:px-6 -mt-24">
-        <!-- 사진 섹션 (터치 간섭 최소화) -->
+        
+        <!-- 동영상 섹션 (최상단 배치) -->
+        <section id="video" class="mb-16 px-2">
+            <div class="video-wrapper shadow-2xl border-[6px] md:border-[12px] border-white">
+                <iframe 
+                    src="https://drive.google.com/file/d/1jOby79Tbagj8kLuCYO5M-ImqYN0bcxUy/preview" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="text-center mt-6">
+                <h3 class="text-xl font-bold text-gray-800 italic">박미경의 진심, 영상으로 확인하세요</h3>
+            </div>
+        </section>
+
+        <!-- 후보 인사말 -->
+        <section class="mb-20 text-center px-2">
+            <div class="inline-block w-16 h-1.5 bg-blue-600 rounded-full mb-10"></div>
+            <h2 class="text-3xl md:text-4xl font-black mb-10 text-gray-800 tracking-tight">"동구의 돌봄을 하나로 연결하겠습니다"</h2>
+            <div class="max-w-3xl mx-auto text-lg text-gray-700 leading-relaxed space-y-6 font-medium bg-white p-8 md:p-12 rounded-[2.5rem] shadow-lg border border-gray-100">
+                <p>30년 의료·돌봄 현장에서 시민의 삶을 직접 겪어온 박미경입니다.</p>
+                <p>동구의 돌봄은 아직도 따로 움직이고 있습니다.</p>
+                <p class="text-blue-700 font-extrabold text-2xl md:text-3xl bg-blue-50 py-6 px-4 rounded-2xl leading-snug">
+                    의료·복지·돌봄을 연결하는 통합돌봄으로<br class="hidden md:block"> 사각지대를 없애겠습니다.
+                </p>
+            </div>
+        </section>
+
+        <!-- 사진 섹션 (중간 배치) -->
         <section id="about" class="grid md:grid-cols-2 gap-6 md:gap-8 mb-20">
             <div class="bg-white p-4 rounded-[2rem] shadow-xl">
                 <div class="aspect-[3/4] drive-embed-container shadow-inner">
@@ -96,32 +119,6 @@
                     <iframe src="https://drive.google.com/file/d/1FxhuUB1KjratMORa2tFvf6vLHKolwQCM/preview"></iframe>
                 </div>
                 <p class="mt-4 text-center font-bold text-blue-800 text-sm">30년 전문성을 갖춘 따뜻한 리더</p>
-            </div>
-        </section>
-
-        <!-- 후보 인사말 -->
-        <section class="mb-24 text-center px-2">
-            <div class="inline-block w-16 h-1.5 bg-blue-600 rounded-full mb-10"></div>
-            <h2 class="text-3xl md:text-4xl font-black mb-10 text-gray-800 tracking-tight">"동구의 돌봄을 하나로 연결하겠습니다"</h2>
-            <div class="max-w-3xl mx-auto text-lg text-gray-700 leading-relaxed space-y-6 font-medium bg-white p-8 md:p-12 rounded-[2.5rem] shadow-lg border border-gray-100">
-                <p>30년 의료·돌봄 현장에서 시민의 삶을 직접 겪어온 박미경입니다.</p>
-                <p>동구의 돌봄은 아직도 따로 움직이고 있습니다.</p>
-                <p class="text-blue-700 font-extrabold text-2xl md:text-3xl bg-blue-50 py-6 px-4 rounded-2xl leading-snug">
-                    의료·복지·돌봄을 연결하는 통합돌봄으로<br class="hidden md:block"> 사각지대를 없애겠습니다.
-                </p>
-            </div>
-        </section>
-
-        <!-- 동영상 섹션 -->
-        <section id="video" class="mb-24 px-2">
-            <div class="text-center mb-10">
-                <h3 class="text-2xl font-bold text-gray-800">박미경의 진심, 영상으로 확인하세요</h3>
-            </div>
-            <div class="video-wrapper shadow-2xl border-[6px] md:border-[12px] border-white">
-                <iframe 
-                    src="https://drive.google.com/file/d/1jOby79Tbagj8kLuCYO5M-ImqYN0bcxUy/preview" 
-                    allowfullscreen>
-                </iframe>
             </div>
         </section>
 
