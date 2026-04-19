@@ -21,7 +21,7 @@
         .pledge-card {
             transition: transform 0.3s ease;
         }
-        /* 드라이브 미리보기 컨테이너: 스크롤 방해 방지 */
+        /* 드라이브 미리보기 컨테이너: 스크롤 방해 방지 및 프레임 최적화 */
         .drive-embed-container {
             position: relative;
             width: 100%;
@@ -31,6 +31,14 @@
             overflow: hidden;
             /* 모바일에서 iframe 내부 클릭이 스크롤을 막지 않도록 설정 */
             pointer-events: none; 
+        }
+        .drive-embed-container iframe {
+            position: absolute;
+            top: -45px; /* 구글 드라이브 미리보기 상단 툴바를 숨기기 위한 보정 */
+            left: 0;
+            width: 100%;
+            height: calc(100% + 45px);
+            border: none;
         }
         /* 비디오는 재생 컨트롤이 필요하므로 클릭 허용하되 영역 최적화 */
         .video-wrapper {
@@ -106,16 +114,16 @@
             </div>
         </section>
 
-        <!-- 사진 섹션 (중간 배치) -->
+        <!-- 사진 섹션 (프레임 비율 및 여백 조정) -->
         <section id="about" class="grid md:grid-cols-2 gap-6 md:gap-8 mb-20">
-            <div class="bg-white p-4 rounded-[2rem] shadow-xl">
-                <div class="aspect-[3/4] drive-embed-container shadow-inner">
+            <div class="bg-white p-3 rounded-[2rem] shadow-xl">
+                <div class="aspect-[1/1.2] drive-embed-container shadow-inner bg-gray-100">
                     <iframe src="https://drive.google.com/file/d/1KQOaljZaZgYPGlSJEIEhp2r-0bHkDl7w/preview"></iframe>
                 </div>
                 <p class="mt-4 text-center font-bold text-blue-800 text-sm">현장에서 시민과 함께하는 박미경</p>
             </div>
-            <div class="bg-white p-4 rounded-[2rem] shadow-xl">
-                <div class="aspect-[3/4] drive-embed-container shadow-inner">
+            <div class="bg-white p-3 rounded-[2rem] shadow-xl">
+                <div class="aspect-[1/1.2] drive-embed-container shadow-inner bg-gray-100">
                     <iframe src="https://drive.google.com/file/d/1FxhuUB1KjratMORa2tFvf6vLHKolwQCM/preview"></iframe>
                 </div>
                 <p class="mt-4 text-center font-bold text-blue-800 text-sm">30년 전문성을 갖춘 따뜻한 리더</p>
